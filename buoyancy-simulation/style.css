@@ -6,3 +6,20 @@
 body {
     overflow: hidden;
 }
+
+.display {
+    position: absolute;
+    height: 100%;
+    text-align: left;
+    bottom: 0px;
+}
+
+.water {
+    pointer-events: none;
+    z-index: 1;
+}
+
+.land {
+    pointer-events: none;
+    z-index: 2;
+}

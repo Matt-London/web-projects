@@ -1,10 +1,19 @@
 class Block {
     // ====================== Constructors ======================
-    constructor(height, width, left, top, weight, color, parent, rigid, gravity, mobile) {
+    constructor(height, width, left, top, mass, volume, image, color, parent, rigid, gravity, mobile, displayable) {
         this.height = parseInt(height);
         this.width = parseInt(width);
-        this.weight = parseInt(weight);
+        this.mass = parseInt(mass);
+        this.volume = parseInt(volume);
+        this.density = parseFloat(mass / 1.0 / volume);
         this.color = color;
+        this.image = image;
+
+        this.displayable = displayable;
+
+        this.weight = mass;
+
+        this.loadTotal = 0;
 
         this.rigid = rigid;
         this.mobile = mobile;
@@ -26,16 +35,17 @@ class Block {
 
         this.div = document.createElement("div");
 
+        this.display = document.createElement("div");
+        this.display.className = "display";
+        this.display.style.pointerEvents = "none";
+        this.div.appendChild(this.display);
+
         if (this.mobile) {
             dragElement(this.div);
         }
         
         this.build();
 
-        // // Add event listener for click to update position
-        // this.div.addEventListener('click', () => {
-        //     this.update();
-        // });
     }
 
     // ====================== Getters ======================
@@ -72,7 +82,9 @@ class Block {
         this.update();
     }
     set_color(c) {
-        this.color = c;
+        if (!this.image) {
+            this.color = c;
+        }
         this.update();
     }
     set_left(l) {
@@ -88,13 +100,21 @@ class Block {
     update(dt) {
         this.div.style.height = this.height + "px";
         this.div.style.width = this.width + "px";
-        this.div.style.backgroundColor = this.color;
+        if (!this.image) {
+            this.div.style.backgroundColor = this.color;
+        }
         this.top = parseInt(this.div.style.top.slice(0, this.div.style.top.length - 2));
         this.left = parseInt(this.div.style.left.slice(0, this.div.style.left.length - 2));
         this.bottom = this.top + this.height;
         this.right = this.left + this.width;
 
         this.update_position(dt);
+
+        this.loadTotal = this.update_load();
+
+        this.update_weight();
+
+        this.update_visible();
 
         
     }
@@ -105,12 +125,27 @@ class Block {
             this.div.style.cursor = "pointer";
         }
 
+        if (this.image) {
+            this.img = document.createElement('img');
+            this.img.src = this.color;
+            this.img.alt = "Image of material";
+            this.img.style.height = this.height;
+            this.img.style.width = this.width;
+            this.img.style.pointerEvents = "none";
+            this.div.appendChild(this.img);
+        }
+
         this.div.style.position = "absolute";
         this.div.className = "block";
         this.div.style.top = this.top + "px";
         this.div.style.left = this.left + "px";
         this.update(time_elapsed());
         this.parent.appendChild(this.div);
+    }
+
+    // Calculates the weight of the block
+    update_weight() {
+        this.weight = this.mass;
     }
 
     // Apply gravity by calculating change in position
@@ -136,6 +171,47 @@ class Block {
         // Run gravity
         if (!this.collision && this.has_gravity) {
             this.gravity(dt);
+        }
+    }
+
+    // Updates weightotal with total weight above
+    update_load() {
+        if (!load_ready) {
+            return 0;
+        }
+        let total_load = 0;
+        let collideBlock = specific_collision(this);
+        if (collideBlock) {
+            let collideBlock = specific_collision(this);
+            total_load += collideBlock.weight + collideBlock.update_load();
+
+        }
+        else {
+            return 0;
+        }
+        this.loadTotal = total_load;
+        return total_load;
+
+    }
+
+    // Updates with what values need to be visible
+    update_visible() {
+        if (this.displayable) {
+            let info = "";
+            if (show_mass) {
+                info += this.mass + " kg<br>";
+            }
+            if (show_volume) {
+                info += this.volume + " m^3<br>";
+            }
+            if (show_weight) {
+                info += this.weight + " N<br>";
+            }
+            if (show_density) {
+                info += this.density + " kg/m^3";
+            }
+
+            this.display.innerHTML = info;
         }
     }
 
