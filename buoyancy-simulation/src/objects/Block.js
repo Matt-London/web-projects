@@ -71,29 +71,23 @@ class Block {
     // ====================== Setters ======================
     set_height(h) {
         this.height = h;
-        this.update();
     }
     set_width(w) {
         this.width = w;
-        this.update();
     }
     set_weight(w) {
         this.weight = w;
-        this.update();
     }
     set_color(c) {
         if (!this.image) {
             this.color = c;
         }
-        this.update();
     }
     set_left(l) {
-        this.left = l;
-        this.update();
+        this.div.style.left = l + "px";
     }
     set_top(t) {
-        this.top = t;
-        this.update();
+        this.div.style.top = t + "px";
     }
 
     // Updates position and what-not
@@ -115,7 +109,6 @@ class Block {
         this.update_weight();
 
         this.update_visible();
-
         
     }
 
@@ -151,7 +144,7 @@ class Block {
     // Apply gravity by calculating change in position
     gravity(dt) {
         // Check if it is currently in collision
-        if (!this.is_clicked && this.bottom < window.innerHeight - 10) {
+        if (!this.is_clicked && this.bottom < this.parent.offsetHeight - 4) {
             // Calculate new velocity
             this.velocity += g * dt;
             // Calculate new position
@@ -159,6 +152,11 @@ class Block {
 
             this.div.style.top = (this.top - dy) + "px";
 
+        }
+
+        else if (this.bottom > this.parent.offsetHeight) {
+            this.div.style.top = this.parent.offsetHeight - this.height - 4 + "px";
+            this.velocity = 0;
         }
 
         else {

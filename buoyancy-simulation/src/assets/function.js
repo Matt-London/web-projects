@@ -14,6 +14,7 @@ function time_elapsed() {
 function update_blocks(dt) {
     for (let i = 0; i < blocks.length; i++) {
         blocks[i].update(dt);
+        stage_collide(blocks[i], stage);
     }
     collision();
 }

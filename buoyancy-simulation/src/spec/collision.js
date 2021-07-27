@@ -40,6 +40,24 @@ function collision() {
     
 }
 
+// Prevent from colliding with stage
+function stage_collide(block, stage) {
+    // Check left
+    if (block.div.getBoundingClientRect().left < stage.getBoundingClientRect().left) {
+        block.div.style.left = "0px";
+    }
+    // Check right
+    else if (block.div.getBoundingClientRect().right > stage.getBoundingClientRect().right - 4) {
+        block.div.style.left = (stage.getBoundingClientRect().width - block.width - 4) + "px";
+    }
+
+    // Check top
+    if (block.div.getBoundingClientRect().top < stage.getBoundingClientRect().top) {
+        block.div.style.top = "0px";
+    }
+    // Bottom is handled by gravity
+}
+
 // Returns the block directly above a
 function specific_collision(a) {
     for (let bi = 0; bi < blocks.length; bi++) {
