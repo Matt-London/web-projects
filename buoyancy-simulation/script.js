@@ -1,26 +1,21 @@
-// 20 pixels = 1 cm
-const stage = document.getElementById("stage");
+// stage height / 80 = 1cm
 
 // To hold scenes later
-let blocks = [];
-let divs = [];
+var blocks = [];
+var divs = [];
 
-const scene = new Scene(stage);
-scene.add_object(new Block(100, 100, 100, 100, 2, 10, true, "images/wood.jpg", stage, true, true, true, true));
-scene.add_object(new Scale(75, 150, 300, 100, stage));
+var current_scene = SAME_MASS;
 
-blocks = scene.block_array;
-divs = scene.blockDiv_array;
+blocks = current_scene.block_array;
+divs = current_scene.blockDiv_array;
 
 load_ready = true;
 
-
-
-
+load_scene(current_scene);
 
 // Main "game" loop
 setInterval(() => {
-    update_scene(scene);
+    update_scene(current_scene);
 
     update_options();
 

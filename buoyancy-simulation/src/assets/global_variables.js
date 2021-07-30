@@ -8,3 +8,5 @@ var show_mass = true;
 var show_weight = true;
 var show_volume = true;
 var show_density = true;
+
+var current_scene;

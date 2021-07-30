@@ -3,17 +3,17 @@ class Block {
     constructor(height, width, left, top, mass, volume, image, color, parent, rigid, gravity, mobile, displayable) {
         this.height = parseInt(height);
         this.width = parseInt(width);
-        this.mass = parseInt(mass);
-        this.volume = parseInt(volume);
+        this.mass = parseFloat(mass);
+        this.volume = parseFloat(volume);
         this.density = parseFloat(mass / 1.0 / volume);
         this.color = color;
         this.image = image;
 
         this.displayable = displayable;
 
-        this.weight = mass;
+        this.weight = parseFloat(mass);
 
-        this.loadTotal = 0;
+        this.loadTotal = parseFloat(0);
 
         this.rigid = rigid;
         this.mobile = mobile;
@@ -43,7 +43,7 @@ class Block {
         if (this.mobile) {
             dragElement(this.div);
         }
-        
+
         this.build();
 
     }
@@ -77,6 +77,9 @@ class Block {
     }
     set_weight(w) {
         this.weight = w;
+    }
+    set_volume(v) {
+        this.volume = v;
     }
     set_color(c) {
         if (!this.image) {
@@ -138,7 +141,7 @@ class Block {
 
     // Calculates the weight of the block
     update_weight() {
-        this.weight = this.mass;
+        this.weight = this.mass * GRAV;
     }
 
     // Apply gravity by calculating change in position
@@ -177,7 +180,7 @@ class Block {
         if (!load_ready) {
             return 0;
         }
-        let total_load = 0;
+        let total_load = 0.0;
         let collideBlock = specific_collision(this);
         if (collideBlock) {
             let collideBlock = specific_collision(this);
@@ -200,13 +203,13 @@ class Block {
                 info += this.mass + " kg<br>";
             }
             if (show_volume) {
-                info += this.volume + " m^3<br>";
+                info += this.volume + " L<br>";
             }
             if (show_weight) {
                 info += this.weight + " N<br>";
             }
             if (show_density) {
-                info += this.density + " kg/m^3";
+                info += this.density + " kg/L";
             }
 
             this.display.innerHTML = info;

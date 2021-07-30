@@ -1,7 +1,7 @@
 class Scale extends Block {
     constructor(height, width, left, top, parent) {
         // Call super
-        super(height, width, left, top, 50, 10, false, "none", parent, true, true, true, true);
+        super(height, width, left, top, 5.10204, 2, false, "none", parent, true, true, true, true);
 
         this.height = height;
         this.width = width;
@@ -45,6 +45,7 @@ class Scale extends Block {
         this.text.style.borderRadius = "1rem";
         this.text.style.padding = "5px";
         this.text.style.fontSize = "22px";
+        this.text.style.width = "60%";
 
         // Allow passthrough
         this.head.style.pointerEvents = "none";
@@ -70,6 +71,6 @@ class Scale extends Block {
             return;
         }
         super.update(dt);
-        this.text.innerHTML = this.loadTotal;
+        this.text.innerHTML = this.loadTotal.toFixed(2) + " N";
     }
 }

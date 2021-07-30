@@ -15,25 +15,43 @@
     <script src="src/objects/Scale.js" defer></script>
     <script src="src/assets/function.js" defer></script>
     <script src="src/spec/options.js" defer></script>
-    <script src="src/scenes/Scene.js" defer></script>
+    <script src="src/objects/Scene.js" defer></script>
     <script src="src/scenes/scene_handler.js" defer></script>
+    <script src="src/scenes/built_scenes.js" defer></script>
     <script src="script.js" defer></script>
 </head>
 <body>
     <div id="form-container">
-        <p id="container-label">Options:</p>
-        <form id="form">
-            <input type="checkbox" id="visible-mass" name="visible-mass">
-            <label for="visible-mass"> Show mass</label><br>
-            <input type="checkbox" id="visible-weight" name="visible-weight">
-            <label for="visible-weight"> Show weight</label><br>
-            <input type="checkbox" id="visible-density" name="visible-density">
-            <label for="visible-density"> Show density</label><br>
-            <input type="checkbox" id="visible-volume" name="visible-volume">
-            <label for="visible-volume"> Show volume</label>
-        </form>
+        <!-- Contents credit to https://www.w3schools.com/howto/howto_js_popup_form.asp -->
+        <button class="open-button" onclick="openForm()">Simulation Settings</button>
+        <div class="form-popup" id="myForm">
+            <form class="form-container">
+              <h1>Simulation Settings</h1>
+            <div style="float: left">
+                <input type="checkbox" id="visible-mass" name="visible-mass">
+                <label for="visible-mass"> Show mass</label><br>
+                <input type="checkbox" id="visible-weight" name="visible-weight">
+                <label for="visible-weight"> Show weight</label><br>
+                <input type="checkbox" id="visible-density" name="visible-density">
+                <label for="visible-density"> Show density</label><br>
+                <input type="checkbox" id="visible-volume" name="visible-volume">
+                <label for="visible-volume"> Show volume</label>
+            </div>
+            <div style="float: right">
+                <input type="radio" id="same-mass" name="scene-select" value="Same Mass" checked="checked">
+                <label for="same-mass">Same Mass</label><br>
+                <input type="radio" id="same-volume" name="scene-select" value="Same Volume">
+                <label for="same-volume">Same Volume</label><br>
+                <input type="radio" id="same-density" name="scene-select" value="Same Density">
+                <label for="same-density">Same Density</label><br>
+            </div>
+          
+              <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            </form>
+        </div>
     </div>
 
     <div id="stage"></div>
+
 </body>
 </html>
