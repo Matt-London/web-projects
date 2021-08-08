@@ -4,19 +4,34 @@
 var blocks = [];
 var divs = [];
 
-var current_scene = SAME_MASS;
+var current_scene;
 
-blocks = current_scene.block_array;
-divs = current_scene.blockDiv_array;
+(async () => {
+    current_scene = SAME_MASS;
 
-load_ready = true;
+    blocks = current_scene.block_array;
+    divs = current_scene.blockDiv_array;
 
-load_scene(current_scene);
+    load_ready = true;
+
+    // await sleep(1000);
+
+    load_scene(current_scene);
+
+
+    preload_complete = true;
+
+
+
+})();
 
 // Main "game" loop
 setInterval(() => {
-    update_scene(current_scene);
+    if (preload_complete) {
+        update_scene(current_scene);
 
-    update_options();
+
+        update_options();
+    }
 
 }, 20);
