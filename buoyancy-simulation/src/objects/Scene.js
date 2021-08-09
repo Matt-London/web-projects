@@ -9,6 +9,7 @@ class Scene {
 
         // Number of pixels that 1cm is equal to
         this.cmLength = this.height / 16;
+        cmLength = this.cmLength;
 
         this.landHeight = this.height / 3.0;
 
@@ -22,7 +23,7 @@ class Scene {
         let right = new Block(this.landHeight, this.width / 4, 0, 0, 1, 0, false, "#3CB043", this.stage, true, false, false, false);
         right.div.className = "land";
 
-        let water = new Block(this.landHeight - 2, this.width / 2, 0, 0, 1, 0, false, "rgba(41, 83, 172, 0.8)", this.stage, false, false, false, false);
+        let water = new Water(this.landHeight - 5, this.width / 2, left.right, this.height - base.height + 1, this.stage);
         water.div.className = "water";
 
         // Make public
@@ -67,6 +68,8 @@ class Scene {
             stage_collide(blocks[i], stage, current_scene);
         }
         collision();
+        update_water(this.water);
+        update_leveler(this.water);
     }
 
     // Drops objects from stage

@@ -1,8 +1,8 @@
 // stage height / 80 = 1cm
 
 // To hold scenes later
-var blocks = [];
-var divs = [];
+blocks = [];
+divs = [];
 
 var current_scene;
 
@@ -29,7 +29,6 @@ var current_scene;
 setInterval(() => {
     if (preload_complete) {
         update_scene(current_scene);
-
 
         update_options();
     }

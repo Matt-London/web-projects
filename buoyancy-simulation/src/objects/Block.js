@@ -102,6 +102,7 @@ class Block {
         }
         this.top = parseInt(this.div.style.top.slice(0, this.div.style.top.length - 2));
         this.left = parseInt(this.div.style.left.slice(0, this.div.style.left.length - 2));
+        
         this.bottom = this.top + this.height;
         this.right = this.left + this.width;
 
@@ -177,6 +178,10 @@ class Block {
 
     // Updates weightotal with total weight above
     update_load() {
+        if (this.div.className == "water") {
+            return 0;
+        }
+
         if (!load_ready) {
             return 0;
         }

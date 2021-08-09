@@ -7,6 +7,14 @@ body {
     overflow: hidden;
 }
 
+#water-level {
+  position: absolute;
+  height: 20px;
+  width: 60px;
+  background-color: white;
+  z-index: 1000;
+}
+
 .display {
     position: absolute;
     height: 100%;

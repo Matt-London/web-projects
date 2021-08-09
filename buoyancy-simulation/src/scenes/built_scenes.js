@@ -24,7 +24,7 @@ unload_scene(SAME_MASS);
 
 // =================== Same volume, different mass (wood and brick)
 const SAME_VOLUME = new Scene(stage);
-const SCENE2_VOLUME = 5; // L
+const SCENE2_VOLUME = 7.5; // L
 const SCENE2_WOOD_MASS = 2; // kg
 const SCENE2_BRICK_MASS = 10; // L
 
