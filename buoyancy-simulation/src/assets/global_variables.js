@@ -12,6 +12,10 @@ var show_density = true;
 
 var stageOffset = 0;
 
+var isWater = true;
+
+var water_element;
+
 var current_scene;
 
 var cmLength = 0;

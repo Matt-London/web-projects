@@ -113,6 +113,10 @@ class Block {
         this.update_weight();
 
         this.update_visible();
+
+        if (this.is_clicked) {
+            this.velocity = 0;
+        }
         
     }
 
@@ -142,37 +146,15 @@ class Block {
 
     // Calculates the weight of the block
     update_weight() {
-        this.weight = this.mass * GRAV;
-    }
-
-    // Apply gravity by calculating change in position
-    gravity(dt) {
-        // Check if it is currently in collision
-        if (!this.is_clicked && this.bottom < this.parent.offsetHeight - 4) {
-            // Calculate new velocity
-            this.velocity += g * dt;
-            // Calculate new position
-            let dy = this.velocity * dt + 0.5 * g * Math.pow(dt, 2);
-
-            this.div.style.top = (this.top - dy) + "px";
-
-        }
-
-        else if (this.bottom > this.parent.offsetHeight) {
-            this.div.style.top = this.parent.offsetHeight - this.height - 4 + "px";
-            this.velocity = 0;
-        }
-
-        else {
-            this.velocity = 0;
-        }
+        this.weight = this.mass * GRAV * -1;
     }
 
     // Apply velocity to update position
     update_position(dt) {
         // Run gravity
         if (!this.collision && this.has_gravity) {
-            this.gravity(dt);
+            gravity(this, dt);
+            update_buoyancy(this, dt);
         }
     }
 

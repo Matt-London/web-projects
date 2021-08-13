@@ -24,7 +24,7 @@ class Scale extends Block {
         this.head.style.borderRadius = "1rem";
 
         // Assemble shaft
-        this.shaft.style.width = "20px";
+        this.shaft.style.width = this.width / 7 + "px";
         this.shaft.style.height = Math.round(1.5 * this.height / 5) + "px";
         this.shaft.style.backgroundColor = this.scale_color;
 
@@ -43,9 +43,9 @@ class Scale extends Block {
         this.text.style.textAlign = "center";
         this.text.style.backgroundColor = "orange";
         this.text.style.borderRadius = "1rem";
-        this.text.style.padding = "5px";
-        this.text.style.fontSize = "22px";
-        this.text.style.width = "60%";
+        this.text.style.padding = "1px";
+        this.text.style.fontSize = Math.round(2.5 * this.height / 5) / 1.5 + "px";
+        this.text.style.width = "80%";
 
         // Allow passthrough
         this.head.style.pointerEvents = "none";

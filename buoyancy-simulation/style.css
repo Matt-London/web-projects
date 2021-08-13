@@ -9,10 +9,27 @@ body {
 
 #water-level {
   position: absolute;
-  height: 20px;
+  z-index: 1000;
+}
+
+#arrow-head {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid red;
+  float: left;
+  z-index: 1000;
+}
+
+#level-text {
+  height: 16px;
   width: 60px;
+  border: 2px solid red;
   background-color: white;
   z-index: 1000;
+  font-weight: bold;
+  float: right;
 }
 
 .display {

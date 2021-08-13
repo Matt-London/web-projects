@@ -2,6 +2,8 @@
 function load_scene(scene) {
     scene.spawn_objects();
 
+    water_element = scene.water_element;
+
     blocks = scene.block_array;
     divs = scene.blockDiv_array;
 
